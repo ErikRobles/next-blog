@@ -22,7 +22,7 @@ const Section3 = () => {
 
 function Post() {
   return (
-    <div className='grid'>
+    <div className='grid mr-3'>
       <div className='images'>
         <Link href='/'>
           <a>

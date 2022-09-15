@@ -6,7 +6,7 @@ import Image from 'next/image';
 const Section4 = () => {
   return (
     <section className='container mx-auto md:px-20 py-16'>
-      <div className='grid lg:grid-cols-2'>
+      <div className='grid lg:grid-cols-2 mr-3'>
         <div className='item'>
           <h1 className='font-bold text-4xl py-12'>Business</h1>
           <div className='flex flex-col gap-6'>

@@ -27,7 +27,7 @@ const Section1 = () => {
 
 function Slide() {
   return (
-    <div className='grid md:grid-cols-2'>
+    <div className='grid md:grid-cols-2 gap-3'>
       <div className='image'>
         <Link href='/'>
           <a>
