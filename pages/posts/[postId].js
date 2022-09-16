@@ -49,7 +49,7 @@ const Article = ({ title, author, subtitle, img, description }) => {
           </p>
         </div>
         <div className='py-10'>
-          <Image src={img || '/'} width={900} height={600} />
+          <Image src={img || '/'} width={900} height={600} alt='' />
         </div>
         <div className='content text-gray-600 text-lg flex flex-col gap-4'>
           <p className='text-gray-500 py-3'>

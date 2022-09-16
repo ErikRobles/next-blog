@@ -7,10 +7,10 @@ import SwiperCore, { Autoplay } from 'swiper';
 import 'swiper/css';
 import Spinner from './_child/Spinner';
 import Error from './_child/Error';
-import fetcher from '../lib/fetcher';
+import useFetcher from '../lib/fetcher';
 
 const Section1 = () => {
-  const { data, isLoading, isError } = fetcher('/api/trending');
+  const { data, isLoading, isError } = useFetcher('/api/trending');
   if (isLoading) {
     return <Spinner />;
   }

@@ -4,10 +4,9 @@ import Author from './_child/Author';
 import Image from 'next/image';
 import Spinner from './_child/Spinner';
 import Error from './_child/Error';
-import fetcher from '../lib/fetcher';
-
+import useFetcher from '../lib/fetcher';
 const Section4 = () => {
-  const { data, isLoading, isError } = fetcher('/api/popular');
+  const { data, isLoading, isError } = useFetcher('/api/popular');
   if (isLoading) {
     return <Spinner />;
   }

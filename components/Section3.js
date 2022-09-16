@@ -2,13 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import fetcher from '../lib/fetcher';
+import useFetcher from '../lib/fetcher';
 import Author from './_child/Author';
 import Error from './_child/Error';
 import Spinner from './_child/Spinner';
 
 const Section3 = () => {
-  const { data, isLoading, isError } = fetcher('/api/popular');
+  const { data, isLoading, isError } = useFetcher('/api/popular');
   if (isLoading) {
     return <Spinner />;
   }
