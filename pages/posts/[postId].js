@@ -63,7 +63,9 @@ const Article = ({ title, author, subtitle, img, description }) => {
 };
 
 export async function getStaticProps({ params }) {
-  const posts = await getPost(params.postId);
+  // const posts = await getPost(params.postId);
+  const res = await fetch(`http://localhost:3000/api/posts/${params.postId}`);
+  const posts = await res.json();
   return {
     props: {
       fallback: {
