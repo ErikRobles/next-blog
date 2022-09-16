@@ -10,7 +10,7 @@ import Error from '../../components/_child/Error';
 import { useRouter } from 'next/router';
 import { SWRConfig } from 'swr';
 
-export default function Page({ fallback }) {
+export default function Page() {
   const router = useRouter();
   const { postId } = router.query;
   const { data, isLoading, isError } = fetcher(`api/posts/${postId}`);
@@ -27,7 +27,7 @@ export default function Page({ fallback }) {
       </div>
     );
   return (
-    <SWRConfig value={{ fallback }}>
+    <SWRConfig>
       <Article {...data} />
     </SWRConfig>
   );
@@ -62,28 +62,28 @@ const Article = ({ title, author, subtitle, img, description }) => {
   );
 };
 
-export async function getStaticProps({ params }) {
-  const posts = await getPost(params.postId);
-  return {
-    props: {
-      fallback: {
-        '/api/posts': posts,
-      },
-    },
-  };
-}
+// export async function getStaticProps({ params }) {
+//   const posts = await getPost(params.postId);
+//   return {
+//     props: {
+//       fallback: {
+//         '/api/posts': posts,
+//       },
+//     },
+//   };
+// }
 
-export async function getStaticPaths() {
-  const posts = await getPost();
-  const paths = posts.map((value) => {
-    return {
-      params: {
-        postId: value.id.toString(),
-      },
-    };
-  });
-  return {
-    paths,
-    fallback: false,
-  };
-}
+// export async function getStaticPaths() {
+//   const posts = await getPost();
+//   const paths = posts.map((value) => {
+//     return {
+//       params: {
+//         postId: value.id.toString(),
+//       },
+//     };
+//   });
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
