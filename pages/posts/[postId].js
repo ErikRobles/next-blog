@@ -10,7 +10,7 @@ import Error from '../../components/_child/Error';
 import { useRouter } from 'next/router';
 import { SWRConfig } from 'swr';
 
-export default function Page() {
+export default function Page({ fallback }) {
   const router = useRouter();
   const { postId } = router.query;
   const { data, isLoading, isError } = useFetcher(`api/posts/${postId}`);
@@ -27,7 +27,7 @@ export default function Page() {
       </div>
     );
   return (
-    <SWRConfig>
+    <SWRConfig value={{ fallback }}>
       <Article {...data} />
     </SWRConfig>
   );
@@ -63,22 +63,18 @@ const Article = ({ title, author, subtitle, img, description }) => {
 };
 
 export async function getStaticProps({ params }) {
-  // const posts = await getPost(params.postId);
-  const res = await fetch(`/api/posts/${params.postId}`);
-  const posts = await res.json();
+  const posts = await getPost(params.postId);
   return {
     props: {
-      posts,
+      fallback: {
+        '/api/posts': posts,
+      },
     },
   };
 }
 
-// Testing the getStaticPaths function
-
 export async function getStaticPaths() {
-  const res = await fetch('/api/posts');
-  const posts = await res.json();
-  // const posts = await getPost();
+  const posts = await getPost();
   const paths = posts.map((value) => {
     return {
       params: {
