@@ -7,7 +7,7 @@ import Spinner from './Spinner';
 import Error from './Error';
 
 const Related = () => {
-  const { data, isLoading, isError } = useFetcher('/api/posts');
+  const { data, isLoading, isError } = useFetcher('api/posts');
   if (isLoading) {
     return <Spinner />;
   }

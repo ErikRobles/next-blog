@@ -10,7 +10,7 @@ import Error from './_child/Error';
 import useFetcher from '../lib/fetcher';
 
 const Section1 = () => {
-  const { data, isLoading, isError } = useFetcher('/api/trending');
+  const { data, isLoading, isError } = useFetcher('api/trending');
   if (isLoading) {
     return <Spinner />;
   }
