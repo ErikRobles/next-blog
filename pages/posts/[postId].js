@@ -4,7 +4,7 @@ import Format from '../../layout/Format';
 import Image from 'next/image';
 import Related from '../../components/_child/Related';
 import getPost from '../../lib/helper';
-import fetcher from '../../lib/fetcher';
+import useFetcher from '../../lib/fetcher';
 import Spinner from '../../components/_child/Spinner';
 import Error from '../../components/_child/Error';
 import { useRouter } from 'next/router';
@@ -13,7 +13,7 @@ import { SWRConfig } from 'swr';
 export default function Page() {
   const router = useRouter();
   const { postId } = router.query;
-  const { data, isLoading, isError } = fetcher(`api/posts/${postId}`);
+  const { data, isLoading, isError } = useFetcher(`api/posts/${postId}`);
   if (isLoading)
     return (
       <div>
@@ -62,28 +62,28 @@ const Article = ({ title, author, subtitle, img, description }) => {
   );
 };
 
-// export async function getStaticProps({ params }) {
-//   const posts = await getPost(params.postId);
-//   return {
-//     props: {
-//       fallback: {
-//         '/api/posts': posts,
-//       },
-//     },
-//   };
-// }
+export async function getStaticProps({ params }) {
+  const posts = await getPost(params.postId);
+  return {
+    props: {
+      fallback: {
+        '/api/posts': posts,
+      },
+    },
+  };
+}
 
-// export async function getStaticPaths() {
-//   const posts = await getPost();
-//   const paths = posts.map((value) => {
-//     return {
-//       params: {
-//         postId: value.id.toString(),
-//       },
-//     };
-//   });
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
+export async function getStaticPaths() {
+  const posts = await getPost();
+  const paths = posts.map((value) => {
+    return {
+      params: {
+        postId: value.id.toString(),
+      },
+    };
+  });
+  return {
+    paths,
+    fallback: false,
+  };
+}
