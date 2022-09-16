@@ -5,8 +5,18 @@ import Author from './_child/Author';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay } from 'swiper';
 import 'swiper/css';
+import Spinner from './_child/Spinner';
+import Error from './_child/Error';
+import fetcher from '../lib/fetcher';
 
 const Section1 = () => {
+  const { data, isLoading, isError } = fetcher('/api/trending');
+  if (isLoading) {
+    return <Spinner />;
+  }
+  if (isError) {
+    return <Error />;
+  }
   SwiperCore.use([Autoplay]);
 
   return (
@@ -14,52 +24,53 @@ const Section1 = () => {
       <div className='container mx-auto md:px-20'>
         <h1 className='font-bold text-4xl pb-12 text-center'>Trending</h1>
         <Swiper slidesPerView={1} autoplay={{ delay: 5000 }} loop='true'>
-          <SwiperSlide>{Slide()}</SwiperSlide>
-          <SwiperSlide>{Slide()}</SwiperSlide>
-          <SwiperSlide>{Slide()}</SwiperSlide>
-          <SwiperSlide>{Slide()}</SwiperSlide>
-          <SwiperSlide>{Slide()}</SwiperSlide>
+          {data.map((value, index) => (
+            <SwiperSlide key={index}>
+              <Slide data={value} />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </section>
   );
 };
 
-function Slide() {
+function Slide({ data }) {
+  const { id, title, subtitle, category, published, img, description, author } =
+    data;
+
   return (
     <div className='grid md:grid-cols-2 gap-3'>
       <div className='image'>
-        <Link href='/'>
+        <Link href={`/posts/${id}`}>
           <a>
-            <Image src={'/images/img1.jpg'} width={600} height={600} />
+            <Image src={img || ''} width={600} height={600} />
           </a>
         </Link>
       </div>
       <div className='info flex justify-center flex-col'>
         <div className='cat'>
-          <Link href='/'>
+          <Link href={`/posts/${id}`}>
             <a className='text-orange-600 hover:text-orange-800'>
-              Business, Travel
+              {category || 'No Category'}
             </a>
           </Link>
-          <Link href='/'>
-            <a className='text-gray-800 hover:text-gray-600'> - July 3, 2022</a>
+          <Link href={`/posts/${id}`}>
+            <a className='text-gray-800 hover:text-gray-600'>
+              {' '}
+              - {published || 'No Date Listed'}
+            </a>
           </Link>
         </div>
         <div className='title'>
-          <Link href='/'>
+          <Link href={`/posts/${id}`}>
             <a className='text-3xl md:text-6xl font-bold text-gray-800 hover:text-gray-600'>
-              Your most unhappy customers are your greatest source of learning.
+              {title || 'No Title'}
             </a>
           </Link>
         </div>
-        <p className='text-gray-500 py-3'>
-          Even the all-powerful Painting has no control about the blind texts.
-          It is an almost unorthographic life. One day however a small line of
-          blind text by the name of Lorem Ipsum decided to leave for the World
-          of Grammar.
-        </p>
-        <Author />
+        <p className='text-gray-500 py-3'>{description || 'No Description'}</p>
+        {author ? <Author {...author} /> : ''}
       </div>
     </div>
   );
