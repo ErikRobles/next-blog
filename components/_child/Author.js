@@ -12,6 +12,7 @@ const Author = ({ name, img, designation }) => {
           width={50}
           height={50}
           className='rounded-full'
+          alt=''
         />
       </div>
       <div className='block sm:hidden'>
@@ -20,6 +21,7 @@ const Author = ({ name, img, designation }) => {
           width={50}
           height={50}
           className='rounded-full'
+          alt=''
         />
       </div>
       <div className='flex flex-col justify-center px-4'>
