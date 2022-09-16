@@ -68,9 +68,7 @@ export async function getStaticProps({ params }) {
   const posts = await res.json();
   return {
     props: {
-      fallback: {
-        '/api/posts': posts,
-      },
+      posts,
     },
   };
 }
