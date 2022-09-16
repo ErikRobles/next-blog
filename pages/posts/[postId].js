@@ -73,6 +73,8 @@ export async function getStaticProps({ params }) {
   };
 }
 
+// Testing the getStaticPaths function
+
 export async function getStaticPaths() {
   const res = await fetch('/api/posts');
   const posts = await res.json();
