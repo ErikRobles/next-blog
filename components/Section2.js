@@ -7,7 +7,7 @@ import Spinner from './_child/Spinner';
 import Error from './_child/Error';
 
 const Section2 = () => {
-  const { data, isLoading, isError } = useFetcher('api/posts');
+  const { data, isLoading, isError } = useFetcher('/api/posts');
   if (isLoading) {
     return <Spinner />;
   }

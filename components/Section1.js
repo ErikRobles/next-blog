@@ -10,7 +10,7 @@ import Error from './_child/Error';
 import useFetcher from '../lib/fetcher';
 
 const Section1 = () => {
-  const { data, isLoading, isError } = useFetcher('api/trending');
+  const { data, isLoading, isError } = useFetcher('/api/trending');
   if (isLoading) {
     return <Spinner />;
   }
@@ -64,7 +64,7 @@ function Slide({ data }) {
         </div>
         <div className='title'>
           <Link href={`/posts/${id}`}>
-            <a className='text-3xl md:text-6xl font-bold text-gray-800 hover:text-gray-600'>
+            <a className='text-3xl md:text-5xl font-bold text-gray-800 hover:text-gray-600'>
               {title || 'No Title'}
             </a>
           </Link>

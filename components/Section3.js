@@ -8,7 +8,7 @@ import Error from './_child/Error';
 import Spinner from './_child/Spinner';
 
 const Section3 = () => {
-  const { data, isLoading, isError } = useFetcher('api/popular');
+  const { data, isLoading, isError } = useFetcher('/api/popular');
   if (isLoading) {
     return <Spinner />;
   }
