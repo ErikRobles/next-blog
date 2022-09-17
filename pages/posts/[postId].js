@@ -9,7 +9,6 @@ import Spinner from '../../components/_child/Spinner';
 import Error from '../../components/_child/Error';
 import { useRouter } from 'next/router';
 import { SWRConfig } from 'swr';
-import { server } from '../config/index';
 
 export default function Page({ fallback }) {
   const router = useRouter();
