@@ -13,7 +13,7 @@ import { SWRConfig } from 'swr';
 export default function Page({ fallback }) {
   const router = useRouter();
   const { postId } = router.query;
-  const { data, isLoading, isError } = useFetcher(`api/posts/${postId}`);
+  const { data, isLoading, isError } = useFetcher(`/api/posts/${postId}`);
   if (isLoading)
     return (
       <div>
@@ -67,7 +67,7 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       fallback: {
-        'api/posts': posts,
+        '/api/posts': posts,
       },
     },
   };
